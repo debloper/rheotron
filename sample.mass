@@ -1,0 +1,26 @@
+background {
+	body: #f8f8f8;
+	section: #fff;
+}
+
+border {
+	section: 2px solid #eee;
+	quote: 1px solid #ccc;
+}
+
+color {
+	body: #444;
+}
+
+font {
+	html: 16px;
+}
+
+margin {
+	body: 0;
+	p: 1rem 0.5rem;
+}
+
+width {
+	body: 100%;
+}
