@@ -20,3 +20,16 @@ print "\n\n";
 # Get the rulesets for the properties in order
 @rules = $MASS =~ /{\n(.+?)\n}/gsm;
 print join("\n==========\n", @rules)."\n";
+
+# Initialize variables
+my %hash = ();
+my $count = 0;
+
+# Loop over the available property names
+while ($count < scalar @prop) {
+	%hash->{@prop[$count]} = @rules[$count];
+	$count++;
+}
+
+# Probe the created Hash
+print join(",", %hash);
