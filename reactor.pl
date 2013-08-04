@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use Data::Dumper;
 
 # Open the file
 # Read the file content as strings
@@ -14,21 +15,24 @@ while (<MASS>) {
 close (MASS);
 
 # Get the property names in order
-@prop = $MASS =~ /}(.+?){/gm;
+@prop[0] = $MASS =~ /(.+?){/m;
+push(@prop, $MASS =~ /}(.+?){/gm);
 
 # Get the rulesets for the properties in order
 @rules = $MASS =~ /{(.+?)}/gm;
 
 # Initialize variables
-my %hash = ();
-my $count = 0;
+%hash = ();
+$count = 0;
 
 # Loop over the available property names
 while ($count < scalar @prop) {
-	print @rules[$count]."\n";
-	%hash->{@prop[$count]} = @rules[$count];
+	for (split(";", @rules[$count])) {
+		my @rule = split(":", $_);
+		$hash{@rule[0]}{@prop[$count]} = @rule[1].";";
+	}
 	$count++;
 }
 
 # Probe the created Hash
-print join(",\n", %hash)."\n";
+print Dumper(\%hash);
