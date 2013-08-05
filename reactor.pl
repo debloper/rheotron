@@ -34,5 +34,17 @@ while ($count < scalar @prop) {
 	$count++;
 }
 
-# Probe the created Hash
-print Dumper(\%hash);
+# Initialize output
+my $CSS = "";
+
+# Prepare the CSS from the has constructed
+for my $selector (keys %hash) {
+	$CSS .= $selector . " {\n";
+	for (keys $hash{$selector}) {
+		$CSS .= $_ . ": " . $hash{$selector}{$_} . "\n";
+	}
+	$CSS .= "}\n";
+}
+
+# Probe output CSS
+print $CSS;
