@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-use Data::Dumper;
 
 # Open the file
 # Read the file content as strings
@@ -53,5 +52,7 @@ for my $selector (keys %hash) {
 	$CSS .= "}\n";
 }
 
-# Probe output CSS
-print $CSS;
+# Generate output to CSS file
+open (CSS, '>sample.css');
+print CSS $CSS;
+close (CSS);
