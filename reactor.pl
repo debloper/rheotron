@@ -29,6 +29,13 @@ $count = 0;
 while ($count < scalar @prop) {
 	for (split(";", @rules[$count])) {
 		my @rule = split(":", $_);
+
+		# Strip off the leading/trailing whitespaces/tabs
+		@rule[0] =~ s/^[\s\t]+|[\s\t]+$//g;
+		@prop[$count] =~ s/^[\s\t]+|[\s\t]+$//g;
+		@rule[1] =~ s/^[\s\t]+|[\s\t]+$//g;
+
+		# Construct the stylesheet hash
 		$hash{@rule[0]}{@prop[$count]} = @rule[1].";";
 	}
 	$count++;
@@ -41,7 +48,7 @@ my $CSS = "";
 for my $selector (keys %hash) {
 	$CSS .= $selector . " {\n";
 	for (keys $hash{$selector}) {
-		$CSS .= $_ . ": " . $hash{$selector}{$_} . "\n";
+		$CSS .= "\t".$_ . ": " . $hash{$selector}{$_} . "\n";
 	}
 	$CSS .= "}\n";
 }
