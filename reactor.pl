@@ -1,16 +1,26 @@
 #!/usr/bin/perl
 
-# Open the file
-# Read the file content as strings
-# Store the string for further processing
-# Close the file
-# TODO: read the filename from arguments
+# Read the arguments for filename
+# Else set default to "sample.mass"
+if (scalar @ARGV > 0) {
+	$FILE = @ARGV[0];
+} else {
+	$FILE = "sample.mass";
+}
+
+# Initialize FileHandle
 $MASS = "";
-open (MASS, 'sample.mass');
+
+# Open the file to read
+open (MASS, $FILE);
+
+# Store the string for further processing
 while (<MASS>) {
 	chomp;
 	$MASS = $MASS.$_;
 }
+
+# Close the file
 close (MASS);
 
 # Get the property names in order
