@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Read the arguments for filename
+# Read the arguments for input filename
 # Else set default to "sample.mass"
 if (scalar @ARGV > 0) {
 	$FILE = @ARGV[0];
@@ -62,7 +62,15 @@ for my $selector (keys %hash) {
 	$CSS .= "}\n";
 }
 
+# Read the arguments for output filename
+# Else set default to "sample.css"
+if (scalar @ARGV > 1) {
+	$PUTS = @ARGV[1];
+} else {
+	$PUTS = "sample.css";
+}
+
 # Generate output to CSS file
-open (CSS, '>sample.css');
+open (CSS, ">", $PUTS);
 print CSS $CSS;
 close (CSS);
